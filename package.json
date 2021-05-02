@@ -2,11 +2,12 @@
   "name": "steve-jobz",
   "version": "1.0.0",
   "description": "Job Board Application (React, Redux, Node, Express, Knex, Jest, Postgres, Ant-Design)",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "cross-env NODE_ENV=beta webpack-dev-server",
     "build-prod": "cross-env NODE_ENV=production webpack",
-    "build-beta": "cross-env NODE_ENV=beta webpack"
+    "build-beta": "cross-env NODE_ENV=beta webpack",
+    "dev:server": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "sass-loader": "^10.0.2",
+    "volleyball": "^1.5.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
