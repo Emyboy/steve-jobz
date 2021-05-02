@@ -7,7 +7,7 @@
     "dev:client": "cross-env NODE_ENV=beta webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
     "build-beta": "cross-env NODE_ENV=beta webpack",
-    "start": "knex migrate:latest && node app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
