@@ -4,7 +4,7 @@
   "description": "Job Board Application (React, Redux, Node, Express, Knex, Jest, Postgres, Ant-Design)",
   "main": "app.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=beta webpack-dev-server",
+    "dev:client": "cross-env NODE_ENV=beta webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
     "build-beta": "cross-env NODE_ENV=beta webpack",
     "start": "node app.js"
