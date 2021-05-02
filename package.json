@@ -36,7 +36,7 @@
     "prod:client": "react-scripts start",
     "start:dev": "nodemon server",
     "start": "node server",
-    "build:client": "react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject:client": "react-scripts eject",
     "dev": "concurrently \"nodemon server\" \"npm run div:client\""
