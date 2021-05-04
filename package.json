@@ -5,16 +5,19 @@
   "main": "app.js",
   "scripts": {
     "dev:client": "cross-env NODE_ENV=beta webpack-dev-server",
+    "dev:server": "nodemon app.js",
     "build": "cross-env NODE_ENV=production webpack",
     "build-beta": "cross-env NODE_ENV=beta webpack",
-    "start": "node app.js"
+    "start": "node app.js",
+    "db:reset": "knex migrate:rollback && knex migrate:latest && knex seed:run",
+    "db:migrate": "knex migrate:latest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Emyboy/steve-jobz.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ifeora Chukwuemeka Stanley",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Emyboy/steve-jobz/issues"
@@ -46,5 +49,8 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }

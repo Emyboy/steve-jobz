@@ -11,11 +11,14 @@ module.exports = {
       password: process.env.DEV_DB_PASSWORD
     },
     migrations: {
-      tableName: 'knex_migrations',
-      directory: __dirname + '/api/db/migrations',
+      directory: 'api/db/migrations',
     },
-    seeds: {
-      directory: __dirname + '/api/db/seeds',
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
     }
   },
 
@@ -23,7 +26,7 @@ module.exports = {
   //   client: 'postgresql',
   //   connection: {
   //     database: 'my_db',
-  //     user: 'username',
+  //     user:     'username',
   //     password: 'password'
   //   },
   //   pool: {
@@ -43,9 +46,8 @@ module.exports = {
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations',
       directory: __dirname + '/api/db/migrations',
+      tableName: 'knex_migrations'
     }
-  }
-
+  },
 };
