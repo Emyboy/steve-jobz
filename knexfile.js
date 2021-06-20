@@ -19,21 +19,26 @@ module.exports = {
     }
   },
 
-  // staging: {
-  //   client: 'postgresql',
-  //   connection: {
-  //     database: 'my_db',
-  //     user: 'username',
-  //     password: 'password'
-  //   },
-  //   pool: {
-  //     min: 2,
-  //     max: 10
-  //   },
-  //   migrations: {
-  //     tableName: 'knex_migrations'
-  //   }
-  // },
+  test: {
+    client: 'postgresql',
+    connection: {
+      database: process.env.TEST_DB_NAME,
+      user: process.env.TEST_DB_USER,
+      password: process.env.TEST_DB_PASSWORD
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations',
+      directory: __dirname + '/api/db/migrations',
+    },
+    seeds: {
+      tableName: 'knex_migrations',
+      directory: __dirname + '/api/db/seeds',
+    },
+  },
 
   staging: {
     client: 'postgresql',
