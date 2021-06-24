@@ -1,15 +1,9 @@
-import React from 'react';
-import './App.css';
-import 'antd/dist/antd.css';
-import { Button } from 'antd';
+import React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Job Finder</h1>
-      <Button type="primary">Login</Button>
-    </div>
-  );
+export default function App() {
+    return (
+        <div>
+            <h1>App</h1>
+        </div>
+    )
 }
-
-export default App;

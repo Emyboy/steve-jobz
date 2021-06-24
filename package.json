@@ -1,66 +1,65 @@
 {
   "name": "steve-jobz",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Job Board Application (React, Redux, Node, Express, Knex, Jest, Postgres, Ant-Design)",
+  "main": "app.js",
+  "scripts": {
+    "dev:client": "cross-env NODE_ENV=beta webpack-dev-server",
+    "dev:server": "cross-env NODE_ENV=development && npm run db:migrate:dev && nodemon app.js",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "build-beta": "cross-env NODE_ENV=beta webpack",
+    "start": "node app.js",
+    "db:reset": "knex migrate:rollback && knex migrate:latest && knex seed:run",
+    "db:migrate:dev": "cross-env NODE_ENV=development && knex migrate:latest",
+    "_pretest": "cross-env NODE_ENV=test && knex migrate:rollback && knex migrate:latest",
+    "test": "cross-env NODE_ENV=test npm run setup:test && cross-env NODE_ENV=test mocha ./api/tests --timeout 10000 --exit",
+    "setup:test": "cross-env NODE_ENV=test knex migrate:rollback && cross-env NODE_ENV=test knex migrate:latest && knex seed:run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emyboy/steve-jobz.git"
+  },
+  "keywords": [],
+  "author": "Ifeora Chukwuemeka Stanley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Emyboy/steve-jobz/issues"
+  },
+  "homepage": "https://github.com/Emyboy/steve-jobz#readme",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "antd": "^4.15.4",
-    "concurrently": "^6.0.2",
+    "babel-loader": "^8.1.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "css-loader": "^4.3.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "express-validator": "^6.10.1",
+    "file-loader": "^6.1.0",
+    "html-loader": "^1.3.0",
+    "html-webpack-plugin": "^4.4.1",
     "knex": "^0.95.4",
+    "mini-css-extract-plugin": "^0.11.1",
+    "node-sass": "^4.14.1",
     "pg": "^8.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^0.2.4",
-    "workbox-background-sync": "^5.1.3",
-    "workbox-broadcast-update": "^5.1.3",
-    "workbox-cacheable-response": "^5.1.3",
-    "workbox-core": "^5.1.3",
-    "workbox-expiration": "^5.1.3",
-    "workbox-google-analytics": "^5.1.3",
-    "workbox-navigation-preload": "^5.1.3",
-    "workbox-precaching": "^5.1.3",
-    "workbox-range-requests": "^5.1.3",
-    "workbox-routing": "^5.1.3",
-    "workbox-strategies": "^5.1.3",
-    "workbox-streams": "^5.1.3",
-    "volleyball": "^1.5.1"
-  },
-  "scripts": {
-    "div:client": "PORT=3000 react-scripts start",
-    "prod:client": "react-scripts start",
-    "start:dev": "nodemon server",
-    "start": "node server",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject:client": "react-scripts eject",
-    "dev": "concurrently \"nodemon server\" \"npm run div:client\""
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "sass-loader": "^10.0.2",
+    "volleyball": "^1.5.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "devDependencies": {
+    "@babel/register": "^7.13.16",
+    "babel-core": "^6.26.3",
+    "babel-polyfill": "^6.26.0",
+    "chai": "4.2.0",
+    "chai-http": "4.2.0",
+    "mocha": "5.2.0",
     "nodemon": "^2.0.7"
   }
 }
