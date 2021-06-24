@@ -5,15 +5,15 @@
   "main": "app.js",
   "scripts": {
     "dev:client": "cross-env NODE_ENV=beta webpack-dev-server",
-    "dev:server": "nodemon app.js",
+    "dev:server": "cross-env NODE_ENV=development && npm run db:migrate:dev && nodemon app.js",
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "build-beta": "cross-env NODE_ENV=beta webpack",
     "start": "node app.js",
     "db:reset": "knex migrate:rollback && knex migrate:latest && knex seed:run",
-    "db:migrate": "knex migrate:latest",
+    "db:migrate:dev": "cross-env NODE_ENV=development && knex migrate:latest",
     "_pretest": "cross-env NODE_ENV=test && knex migrate:rollback && knex migrate:latest",
-    "test": "NODE_ENV=test npm run setup:test && NODE_ENV=test mocha ./api/tests --timeout 10000 --exit",
-    "setup:test": "NODE_ENV=test knex migrate:rollback && NODE_ENV=test knex migrate:latest && knex seed:run"
+    "test": "cross-env NODE_ENV=test npm run setup:test && cross-env NODE_ENV=test mocha ./api/tests --timeout 10000 --exit",
+    "setup:test": "cross-env NODE_ENV=test knex migrate:rollback && cross-env NODE_ENV=test knex migrate:latest && knex seed:run"
   },
   "repository": {
     "type": "git",
