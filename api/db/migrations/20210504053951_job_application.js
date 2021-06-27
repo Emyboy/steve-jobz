@@ -1,17 +1,17 @@
 
 exports.up = function (knex) {
-    return knex.schema.createTable('job_application', t => {
+    return knex.schema.createTable('job_applications', t => {
         t.increments('id').primary();
         t.integer('job_id')
             .notNullable()
             .references('id')
-            .inTable('company_job')
+            .inTable('company_jobs')
             .onDelete('CASCADE')
             .index();
         t.integer('applicant_id')
             .notNullable()
             .references('id')
-            .inTable('user')
+            .inTable('users')
             .onDelete('CASCADE')
             .index();
         t.timestamps(true, true);
@@ -19,5 +19,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('job_application');
+    return knex.schema.dropTable('job_applications');
 };

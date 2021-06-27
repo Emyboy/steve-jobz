@@ -1,6 +1,6 @@
 
 exports.up = function (knex) {
-    return knex.schema.createTable('company_job', t => {
+    return knex.schema.createTable('company_jobs', t => {
         t.increments('id').primary();
         t.string('title').notNullable();
         t.string('description').notNullable();
@@ -9,14 +9,14 @@ exports.up = function (knex) {
         t.integer('company_id')
             .notNullable()
             .references('id')
-            .inTable('company')
+            .inTable('companies')
             .onDelete('CASCADE')
             .index();
-        t.text('salary');
+        t.integer('salary');
         t.timestamps(true, true);
     })
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('company_job');
+    return knex.schema.dropTable('company_jobs');
 };

@@ -5,7 +5,7 @@ const {
     signup
  } = userController;
 
-userRoute.get('/users', signup);
+userRoute.post('/user', signup);
 
 module.exports = userRoute;
  

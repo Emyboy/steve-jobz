@@ -1,6 +1,6 @@
 
 exports.up = function (knex) {
-    return knex.schema.createTable('company', t => {
+    return knex.schema.createTable('companies', t => {
         t.increments('id').primary();
         t.string('name').notNullable().unique();
         t.string('about').notNullable();
@@ -11,7 +11,7 @@ exports.up = function (knex) {
         t.integer('user_id')
             .notNullable()
             .references('id')
-            .inTable('user')
+            .inTable('users')
             .onDelete('CASCADE')
             .index();
         t.timestamps(true, true);
@@ -19,5 +19,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('company');
+    return knex.schema.dropTable('companies');
 };

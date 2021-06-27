@@ -1,6 +1,6 @@
 
 exports.up = function (knex) {
-    return knex.schema.createTable('user', t => {
+    return knex.schema.createTable('users', t => {
         t.increments('id').primary();
         t.string('first_name', 25).notNullable();
         t.string('last_name', 25).notNullable();
@@ -11,16 +11,16 @@ exports.up = function (knex) {
         t.string('bio');
         t.string('avatar_url').defaultTo('https://cdn.iconscout.com/icon/free/png-256/user-1648810-1401302.png');
         t.text('gender').notNullable();
-        t.integer('role_id')
-            .references('id')
-            .inTable('role')
-            .notNullable()
-            .onDelete('CASCADE')
-            .index();
+        t.integer('role_id').notNullable()
+        //     .references('id')
+        //     .inTable('roles')
+        //     .notNullable()
+        //     .onDelete('CASCADE')
+        //     .index();
         t.timestamps(true, true);
     })
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('user');
+    return knex.schema.dropTable('users');
 };

@@ -1,6 +1,6 @@
 
 exports.up = function (knex) {
-    return knex.schema.createTable('job_question_type', t => {
+    return knex.schema.createTable('job_question_types', t => {
         t.increments('id').primary();
         t.string('name').notNullable();
         t.timestamps(true, true);
@@ -8,5 +8,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('job_question_type');
+    return knex.schema.dropTable('job_question_types');
 };
