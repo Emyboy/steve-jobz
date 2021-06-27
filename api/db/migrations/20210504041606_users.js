@@ -2,13 +2,16 @@
 exports.up = function (knex) {
     return knex.schema.createTable('users', t => {
         t.increments('id').primary();
-        t.string('first_name', 25).notNullable();
-        t.string('last_name', 25).notNullable();
-        t.text('username').notNullable().unique();
-        t.string('email', 25).notNullable().unique();
+        t.string('first_name', 30).notNullable();
+        t.string('last_name', 30).notNullable();
+        t.text('username', 12).notNullable().unique();
+        t.string('email', 35).notNullable().unique();
         t.string('password').notNullable();
         t.string('title');
         t.string('bio');
+        t.boolean('isVerified').defaultTo(false),
+        t.string('confirm_email_token');
+        t.boolean('emailVerified').defaultTo(false),
         t.string('avatar_url').defaultTo('https://cdn.iconscout.com/icon/free/png-256/user-1648810-1401302.png');
         t.text('gender').notNullable();
         t.integer('role_id').notNullable()

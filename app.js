@@ -15,7 +15,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-new knexSessionStore({
+const store = new knexSessionStore({
     knex: require('./api/db/index'),
     tablename: 'sessions',
     sidfieldname: 'sid',
@@ -28,6 +28,7 @@ app.use(session({
     name: 'sid',
     saveUninitialized: false,
     resave: false,
+    store,
     cookie: {
         maxAge: 1000 * 60 * 60 * 2,
         sameSite: true,
@@ -41,7 +42,7 @@ app.use(volleyball)
 
 app.use('/api/v1', rootRoute);
 app.get('/*', (req, res) => {
-    console.log('SESSION ---', req.session)
+    req.session.token = 'hi'
     res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
