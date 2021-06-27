@@ -14,7 +14,7 @@ const bodyParser = require("body-parser");
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-// app.use(express.json())
+
 new knexSessionStore({
     knex: require('./api/db/index'),
     tablename: 'sessions',
