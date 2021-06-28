@@ -12,6 +12,15 @@ module.exports = {
         });
     },
 
+    comparePasswords: async (textPassword, hash) => {
+        try {
+            const isPassowrd = await bcrypt.compare(textPassword, hash);
+            return isPassowrd;
+        } catch (error) {
+            return false
+        }
+    },
+
     generateToken: async user => {
         try {
             const token = await jwt.sign({ id: user.id, email: user.email }, process.env.SECRET);

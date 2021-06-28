@@ -38,6 +38,19 @@ module.exports = {
         check('gender', 'Gender is required').exists().toLowerCase(),
         check('gender', 'Invalid gender').isLength({ max: 1 }).isString(),
     ],
+    validateLogin: [
+        // email
+        check('email', 'Email is required').exists(),
+        check('email', 'Invalid email or password')
+            .isEmail().isLength({ max: 35, min: 5 })
+            .isString(),
+            // password
+        check('password', 'Password is required').exists(),
+        check('password', 'Password is too short').isString().isLength({ min: 5 }),
+        check('password')
+            .custom(value => !/\s/.test(value))
+            .withMessage('No spaces are allowed in the password'),
+    ],
     handleReqError: (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

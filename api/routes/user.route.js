@@ -1,18 +1,19 @@
 const express = require('express');
+const {
+    loginUser,
+    signup,
+    logoutUser
+} = require('../controllers/user.controller');
 const userRoute = express.Router();
-const userController = require('../controllers/user.controller');
 
 const {
     validateSingup,
-    handleReqError
-} = require('../middleware/validator');
-
-const {
-    signup,
-    logoutUser
-} = userController;
+    handleReqError,
+    validateLogin
+} = require('../middleware/auth.validator');
 
 userRoute.post('/user', validateSingup, handleReqError, signup);
-userRoute.put('/user/logout', handleReqError, signup);
+userRoute.post('/user/auth', validateLogin, handleReqError, loginUser)
+userRoute.put('/user/logout', handleReqError, logoutUser);
 
 module.exports = userRoute;

@@ -1,5 +1,5 @@
 const db = require('../db/index');
-const { hashPassword, generateToken } = require('../helpers/auth.helper');
+const { hashPassword, generateToken, comparePasswords } = require('../helpers/auth.helper');
 const HandleKnexError = require('../helpers/HandleKnexError');
 
 module.exports = class UserService {
@@ -20,12 +20,34 @@ module.exports = class UserService {
                 first_name,
                 last_name,
                 gender,
-                password: hashedPWord, 
+                password: hashedPWord,
                 role_id: 1
             }).returning('*');
             return users
         } catch (error) {
             throw new Error(HandleKnexError(error) || 'Bad Request')
+        }
+    }
+
+    static async loginUser(userData) {
+        try {
+            const {
+                email,
+                password
+            } = userData;
+
+            const dbUser = await db.select('*').from('users').where({
+                email
+            });
+            const check = await comparePasswords(password, dbUser[0].password);
+            if (dbUser.length === 0 || !check) {
+                throw new Error()
+            }
+            return dbUser
+
+        } catch (error) {
+            console.log('erro --', error)
+            throw new Error(HandleKnexError(error) || 'Incorrect username or password')
         }
     }
 
