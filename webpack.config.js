@@ -39,6 +39,17 @@ module.exports = {
                 ]
             },
             {
+                test: /\.(ttf|woff2|gif|svg|eot|woff)$/i,
+                use: [
+                  {
+                    loader: 'url-loader',
+                    options: {
+                      limit: 8192,
+                    },
+                  },
+                ],
+              },
+            {
                 test: /\.(css|scss)$/i,
                 use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
             }
