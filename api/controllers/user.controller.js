@@ -12,14 +12,12 @@ class UserController {
             const registeredUser = await UserService.registerUser(req.body);
             if(registeredUser.length === 1){
                 req.session.token = await generateToken(registeredUser[0]);
-                console.log('NEW SESSION ---', req.session)
-                res.send(registeredUser[0])
+                res.status(201).send(registeredUser[0])
             }else {
                 res.status(500)
             }
 
         } catch (error) {
-            console.log('ERROR FROM CONTROLLER ---', error)
             res.status(400).send(createError(400, error.message))
         }
     };

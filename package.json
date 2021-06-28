@@ -11,8 +11,8 @@
     "start": "npm run build && node app.js",
     "db:reset": "knex migrate:rollback && knex migrate:latest && knex seed:run && npm run dev",
     "db:migrate:dev": "cross-env NODE_ENV=development && knex migrate:latest",
-    "_pretest": "cross-env NODE_ENV=test && knex migrate:rollback && knex migrate:latest",
-    "test": "cross-env NODE_ENV=test npm run setup:test && cross-env NODE_ENV=test mocha ./api/tests --timeout 10000 --exit",
+    "pretest": "cross-env NODE_ENV=test && knex migrate:rollback && knex migrate:latest",
+    "test": "cross-env NODE_ENV=test npm run setup:test && cross-env NODE_ENV=test mocha ./api/tests/**/*.test.js --timeout 10000 --exit",
     "setup:test": "cross-env NODE_ENV=test knex migrate:rollback && cross-env NODE_ENV=test knex migrate:latest && knex seed:run"
   },
   "repository": {
