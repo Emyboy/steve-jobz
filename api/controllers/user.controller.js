@@ -7,7 +7,12 @@ var jwt = require('jsonwebtoken');
 
 class UserController {
 
-    static async signup(req, res, next) {
+    /**
+     * @description - This method signs a user up and sets session cookies
+     * @param {Object} req - Request object
+     * @param {Object} res - Response object
+     */
+    static async signup(req, res) {
         try {
             const registeredUser = await UserService.registerUser(req.body);
             if (registeredUser.length === 1) {
@@ -22,6 +27,11 @@ class UserController {
         }
     };
 
+    /**
+     * @description - this method logs in a user and sets session cookies
+     * @param {Object} req 
+     * @param {Object} res 
+     */
     static async loginUser(req, res) {
         try {
             const userData = await UserService.loginUser(req.body);

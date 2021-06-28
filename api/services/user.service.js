@@ -4,6 +4,11 @@ const HandleKnexError = require('../helpers/HandleKnexError');
 
 module.exports = class UserService {
 
+    /**
+     * @description - This function will add a new user to DB
+     * @param {Object} userData - User data returned from request body
+     * @returns - User data object from DB
+     */
     static async registerUser(userData) {
         try {
             const {
@@ -29,6 +34,11 @@ module.exports = class UserService {
         }
     }
 
+    /**
+     * @description - This function logs in a user and sets the session cookies
+     * @param {Object} userData - email and password from request body
+     * @returns 
+     */
     static async loginUser(userData) {
         try {
             const {
