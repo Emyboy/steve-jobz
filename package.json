@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development && npm run db:migrate:dev && nodemon app.js",
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "build-beta": "cross-env NODE_ENV=beta webpack",
-    "start": "npm run build && node app.js",
+    "start": "cross-env NODE_ENV=production npm run build && cross-env NODE_ENV=production node app.js",
     "db:reset": "knex migrate:rollback && knex migrate:latest && knex seed:run && npm run dev",
     "db:migrate:dev": "cross-env NODE_ENV=development && knex migrate:latest",
     "pretest": "cross-env NODE_ENV=test && knex migrate:rollback && knex migrate:latest",
