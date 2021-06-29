@@ -45,6 +45,18 @@ module.exports = {
         } catch (error) {
             throw new Error('JWT Error')
         }
+    },
+
+    /**
+     * @description - Removed sensitive data from user object
+     * @param {Object} userData - User data object
+     * @returns - filtered user data
+     */
+    filterUserData: userData => {
+        const newData = { ...userData };
+        delete newData.password;
+        delete newData.confirm_email_token;
+        return newData;
     }
 
 }

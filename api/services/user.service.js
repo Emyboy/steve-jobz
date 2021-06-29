@@ -61,5 +61,51 @@ module.exports = class UserService {
         }
     }
 
+    /**
+     * @description - Gets user by ID from DB
+     * @param {Number} id - User ID
+     * @returns - user object from DB
+     */
+    static async getDbUserById(id) {
+        try {
+            const user = await db('users').where({
+                id
+            }).returning('*');
+            return user
+        } catch (error) {
+            console.log(error)
+            throw new Error('Request error')
+        }
+    };
+
+    static async editUserDataOnDb(id, data){
+        try {
+            console.log('data from service --', data);
+            const {
+                username,
+                first_name,
+                last_name, 
+                gender,
+                facebook,
+                linkedin,
+                twitter,
+                phone_number
+            } = data;
+            const edit = await db('users').where({ id }).update({
+                username,
+                first_name,
+                last_name,
+                gender,
+                facebook,
+                linkedin,
+                twitter,
+                phone_number
+            });
+            return edit;
+        } catch (error) {
+            throw new Error(HandleKnexError(error) || 'Bad request')
+        }
+    }
+
 }
 

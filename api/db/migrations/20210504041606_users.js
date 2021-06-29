@@ -11,9 +11,16 @@ exports.up = function (knex) {
         t.string('bio');
         t.boolean('isVerified').defaultTo(false),
         t.string('confirm_email_token');
-        t.boolean('emailVerified').defaultTo(false),
+        t.boolean('email_verified').defaultTo(false),
         t.string('avatar_url').defaultTo('https://cdn.iconscout.com/icon/free/png-256/user-1648810-1401302.png');
         t.text('gender').notNullable();
+        t.text('phone_number');
+        t.integer('salary');
+        t.string('facebook',100);
+        t.string('twitter',100);
+        t.string('linkedin',100);
+        t.string('location');
+        t.jsonb('google_location');
         t.integer('role_id').notNullable()
         //     .references('id')
         //     .inTable('roles')

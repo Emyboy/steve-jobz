@@ -15,17 +15,12 @@ import './assets/css/bootstrap/bootstrap.min.css';
 import './assets/css/subtle-slideshow.css';
 import './assets/css/style.css';
 
-import Navbar from './components/Navbar/Navbar';
-import Jumbo from './components/Jumbo/Jumba';
-import Home from './page/Home/Home';
-import Footer from './components/Footer/Footer';
+import AppRouter from './router/AppRouter';
 
 export default function App() {
     return (
         <div>
-            <Navbar />
-            <Home />
-            <Footer />
+           <AppRouter />
         </div>
     )
 }

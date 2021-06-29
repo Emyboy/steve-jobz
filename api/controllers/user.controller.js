@@ -1,7 +1,7 @@
 const knex = require('../db/index');
 const UserService = require('../services/user.service');
 var createError = require('http-errors');
-const { generateToken } = require('../helpers/auth.helper');
+const { generateToken, filterUserData } = require('../helpers/auth.helper');
 var jwt = require('jsonwebtoken');
 
 
@@ -16,8 +16,8 @@ class UserController {
         try {
             const registeredUser = await UserService.registerUser(req.body);
             if (registeredUser.length === 1) {
-                req.session.token = await generateToken(registeredUser[0]);
-                res.status(201).send(registeredUser[0])
+                req.session.user_id = registeredUser[0].id;
+                res.status(201).send(filterUserData(registeredUser[0]))
             } else {
                 res.status(500)
             }
@@ -36,11 +36,38 @@ class UserController {
         try {
             const userData = await UserService.loginUser(req.body);
             if (userData) {
-                req.session.token = await generateToken(userData[0]);
-                res.status(200).json(userData)
+                req.session.user_id = userData[0].id;
+                res.status(200).json(filterUserData(userData[0]))
             }
         } catch (error) {
             res.status(400).send(createError(400, error.message))
+        }
+    }
+
+    /**
+     * @description - Gets user by id
+     * @param {Object} req 
+     * @param {Object} res 
+     */
+    static async getUserById(req, res) {
+        try {
+            const user = await UserService.getDbUserById(req.params.user_id);
+            if (user.length > 0) {
+                res.send(filterUserData(user[0]))
+            } else {
+                res.status(404).json({ message: 'not found' })
+            }
+        } catch (error) {
+            res.status(500).send(createError(500, error.message))
+        }
+    };
+
+    static async editUserData(req, res) {
+        try {
+            const edited = await UserService.editUserDataOnDb(req.params.user_id, req.body);
+            res.status(200).json(edited)
+        } catch (error) {
+            res.status(500).send(createError(500, 'bad request'))
         }
     }
 
